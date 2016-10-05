@@ -1,19 +1,8 @@
+var objectid = require("mongodb").ObjectId;
 var schema = new Schema({
-    cityName: {
+    name: {
         type: String,
         default:""
-    },
-    country: {
-        type: String,
-        default:""
-    },
-    content:{
-      type: String,
-      default:""
-    },
-    image:{
-      type:String,
-      default:""
     },
     status: {
         type: String,
@@ -24,7 +13,7 @@ var schema = new Schema({
 schema.plugin(deepPopulate, {});
 schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
-module.exports = mongoose.model('City', schema);
+module.exports = mongoose.model('Reaction', schema);
 
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {};

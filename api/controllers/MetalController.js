@@ -1,36 +1,27 @@
 module.exports = _.cloneDeep(require("sails-wohlig-controller"));
 var controller = {
-
-  getPack:function(req,res){
+  getContent:function(req,res){
     if(req.body){
-      Package.getPack(req.body,res.callback);
+      Metal.getContent(req.body,res.callback);
     }
     else {
       res.json({value:false,data:{message:"Invalid Request"}})
     }
   },
-  getOnePack:function(req,res){
+  getOneContent:function(req,res){
     if(req.body){
-      Package.getOnePack(req.body,res.callback);
-    }
-    else {
-      res.json({value:false,data:{message:"Invalid Request"}})
-    }
-  },
-  savePack:function(req,res){
-    if(req.body){
-      Package.savePack(req.body,res.callback);
+      Metal.getOneContent(req.body,res.callback);
     }
     else {
       res.json({value:false,data:{message:"Invalid Request"}})
     }
   },
 
-  deletePack: function(req, res) {
+deleteContent: function(req, res) {
 if (req.body) {
 if (req.body._id && req.body._id !== "") {
 //	console.log("not valid");
-Package.deletePack(req.body, function(err, respo) {
+Metal.deleteContent(req.body, function(err, respo) {
 if (err) {
 res.json({
 value: false,
@@ -56,5 +47,14 @@ data: "Invalid call"
 });
 }
 },
+  saveContent:function(req,res){
+    if(req.body){
+      Metal.saveContent(req.body,res.callback);
+    }
+    else{
+      res.json({value:false,data:{message:"Invalid Request"}})
+    }
+  }
+
 };
 module.exports = _.assign(module.exports, controller);
