@@ -4,6 +4,11 @@ var schema = new Schema({
     type: String,
     default: ""
   },
+  reaction:{
+    type: Schema.Types.ObjectId,
+    ref: 'Reaction',
+    index: true
+  },
   status: {
     type: String,
     enum: ["true", "false"]
@@ -132,6 +137,23 @@ var model = {
         }
       });
     }
-  }
+  },
+  getMetal:function(data,callback){
+      Metal.find({
+    status:"true",
+    reaction:data._id
+  }).exec(function(err, found){
+      if(err){
+        callback(err, null);
+      }else {
+        if(found){
+        callback(null,found);
+      }else{
+        callback(null,{message:"No Data Found"});
+      }
+      }
+
+    })
+  },
 };
 module.exports = _.assign(module.exports, exports, model);
